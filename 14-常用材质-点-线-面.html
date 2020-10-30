@@ -21,26 +21,70 @@
         var scene = new THREE.Scene();
 
         // 创建网络模型
-        var geometry = new THREE.SphereGeometry(30, 40, 40, 0, Math.PI * 2) // 球体
+        var geometry = new THREE.SphereGeometry(30, 40, 20) // 球体
         var geometry2 = new THREE.BoxGeometry(40, 40, 40) //  立方体
         var geometry3 = new THREE.CylinderGeometry(30, 30, 40, 100) //  圆柱体
-        // var geometry = new THREE.OctahedronGeometry(50) //  正八面体
-        // var geometry = new THREE.DodecahedronGeometry(50) //  正十二面体
-        // var geometry = new THREE.IcosahedronGeometry(50) //  正二十面体
+        var geometry4 = new THREE.OctahedronGeometry(40) //  正八面体
+        var geometry5 = new THREE.DodecahedronGeometry(30) //  正十二面体
+        var geometry6 = new THREE.IcosahedronGeometry(40) //  正二十面体
 
-        var material = new THREE.MeshLambertMaterial({
+        // 点
+        var material = new THREE.PointsMaterial({ 
+            color: 0xff0000,
+            // size: 2,
+            // vertexColors: THREE.VertexColors // 使用定点颜色
+            // wireframe: true, // 线条模式渲染
+            // transparent: true, // 透明模式
+            // opacity: 0.6, // 透明度
+        }) // 材质对象
+
+        // 不受光照影响
+        var material2 = new THREE.MeshBasicMaterial({
             color: 0x0000ff
         }) // 材质对象
-        var material2 = new THREE.MeshLambertMaterial({
-            color: 0xff00f0
-        }) // 材质对象
-        var material3 = new THREE.MeshLambertMaterial({
-            color: 0x0f6f60
+
+        // 线条
+        var material3 = new THREE.LineBasicMaterial({ 
+            color: 0xff0000,
+            size: 7,
+            // vertexColors: THREE.VertexColors // 使用定点颜色
+            // wireframe: true, // 线条模式渲染
+            // transparent: true, // 透明模式
+            // opacity: 0.6, // 透明度
         }) // 材质对象
 
-        var mesh = new THREE.Mesh(geometry, material) // 网络模型对象Mesh
+        // 虚线
+        var material4 = new THREE.LineDashedMaterial({ 
+            color: 0xffff00,
+            dashSize: 5,
+            gapSize: 2,
+            // size: 7,
+            // vertexColors: THREE.VertexColors // 使用定点颜色
+            // wireframe: true, // 线条模式渲染
+            // transparent: true, // 透明模式
+            // opacity: 0.6, // 透明度
+        }) // 材质对象
+
+        // 漫反射
+        var material5= new THREE.MeshLambertMaterial({ // 不受光照效果
+            color: 0x0000ff,
+            // wireframe: true // 线条模式渲染
+        }) // 材质对象
+
+        // 高光
+        var material6 = new THREE.MeshPhongMaterial({ // 镜面反射
+            color: 0xff0000,
+            specular: 0x444444,
+            shininess: 30
+        }) // 材质对象
+
+        var mesh = new THREE.Points(geometry, material) // 网络模型对象Mesh
         var mesh2 = new THREE.Mesh(geometry2, material2) // 网络模型对象Mesh
-        var mesh3 = new THREE.Mesh(geometry3, material3) // 网络模型对象Mesh
+        var mesh3 = new THREE.Line(geometry3, material3) // 网络模型对象Mesh
+        var mesh4 = new THREE.Line(geometry4, material4) // 网络模型对象Mesh
+        var mesh5 = new THREE.Mesh(geometry5, material5) // 网络模型对象Mesh
+        var mesh6 = new THREE.Mesh(geometry6, material6) // 网络模型对象Mesh
+
         scene.add(mesh) // 网络模型 添加到场景中
 
         mesh2.translateZ(60)
@@ -49,6 +93,18 @@
 
         mesh3.position.set(60,0,0)
         scene.add(mesh3) // 网络模型 添加到场景中
+
+
+        mesh4.translateX(100)
+        mesh4.translateZ(100)
+        mesh4.computeLineDistances(); // 虚线 计算所需数组
+        scene.add(mesh4) // 网络模型 添加到场景中
+
+        mesh5.translateX(150)
+        scene.add(mesh5) // 网络模型 添加到场景中
+
+        mesh6.translateZ(150)
+        scene.add(mesh6) // 网络模型 添加到场景中
         
 
         /**

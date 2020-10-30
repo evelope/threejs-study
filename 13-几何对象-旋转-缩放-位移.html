@@ -21,42 +21,33 @@
         var scene = new THREE.Scene();
 
         // 创建网络模型
-        var geometry = new THREE.SphereGeometry(30, 40, 40, 0, Math.PI * 2) // 球体
-        var geometry2 = new THREE.BoxGeometry(40, 40, 40) //  立方体
-        var geometry3 = new THREE.CylinderGeometry(30, 30, 40, 100) //  圆柱体
-        // var geometry = new THREE.OctahedronGeometry(50) //  正八面体
-        // var geometry = new THREE.DodecahedronGeometry(50) //  正十二面体
-        // var geometry = new THREE.IcosahedronGeometry(50) //  正二十面体
+        // var geometry = new THREE.BoxGeometry(40, 40, 40,2,2,2) //  立方体
+        var geometry = new THREE.BoxGeometry(40, 40, 40) //  立方体
 
-        var material = new THREE.MeshLambertMaterial({
-            color: 0x0000ff
-        }) // 材质对象
-        var material2 = new THREE.MeshLambertMaterial({
-            color: 0xff00f0
-        }) // 材质对象
-        var material3 = new THREE.MeshLambertMaterial({
-            color: 0x0f6f60
+        // 缩放
+        geometry.scale(2,3,2)
+
+        // 位移
+        geometry.translate(0,0,50)
+
+        // 旋转
+        geometry.rotateY(Math.PI / 4)
+
+
+        var material = new THREE.MeshLambertMaterial({ // 不受光照效果
+            color: 0x0000ff,
+            side: THREE.DoubleSide, // 两面可见
+            // wireframe: true // 线条模式渲染
         }) // 材质对象
 
         var mesh = new THREE.Mesh(geometry, material) // 网络模型对象Mesh
-        var mesh2 = new THREE.Mesh(geometry2, material2) // 网络模型对象Mesh
-        var mesh3 = new THREE.Mesh(geometry3, material3) // 网络模型对象Mesh
         scene.add(mesh) // 网络模型 添加到场景中
-
-        mesh2.translateZ(60)
-        mesh2.rotateY(45)
-        scene.add(mesh2) // 网络模型 添加到场景中
-
-        mesh3.position.set(60,0,0)
-        scene.add(mesh3) // 网络模型 添加到场景中
-        
 
         /**
          * 辅助坐标系
          */
         var axisHelper = new THREE.AxisHelper(200);
         scene.add(axisHelper) 
-
 
         /**
          * 光源设置
