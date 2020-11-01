@@ -86,6 +86,16 @@
         var mesh6 = new THREE.Mesh(geometry6, material6) // 网络模型对象Mesh
 
         scene.add(mesh) // 网络模型 添加到场景中
+        // mesh.scale.set(1,2,1)    // 缩放
+        mesh.scale.y = 2
+
+        // mesh.position.set(0,60,0)  // 平移
+        mesh.translateY(70)
+        // mesh.translateOnAxis(new THREE.Vector3(1,4,1).normalize(), 100)  // Vector3(1,4,1) 法向量 方向  normalize 向量归一化
+
+        // mesh.rotateX(Math.PI / 2)    // 旋转
+        mesh.rotateOnAxis(new THREE.Vector3(1,1,1).normalize(), Math.PI / 2)  // Vector3(1,4,1) 法向量 方向  normalize 向量归一化
+
 
         mesh2.translateZ(60)
         mesh2.rotateY(45)
